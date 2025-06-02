@@ -15,11 +15,11 @@
   <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" alt="Contributors">
   </a>
-  <a href="https://www.nuget.org/packages/Synapsers.Oauth/">
-    <img src="https://img.shields.io/nuget/v/Synapsers.Oauth.svg" alt="NuGet version">
+  <a href="https://www.nuget.org/packages/Synapsers.Oauth.Matterport/">
+    <img src="https://img.shields.io/nuget/v/Synapsers.Oauth.Matterport.svg" alt="NuGet version">
   </a>
-  <a href="https://www.nuget.org/packages/Synapsers.Oauth/">
-    <img src="https://img.shields.io/nuget/dt/Synapsers.Oauth.svg" alt="NuGet downloads">
+  <a href="https://www.nuget.org/packages/Synapsers.Oauth.Matterport/">
+    <img src="https://img.shields.io/nuget/dt/Synapsers.Oauth.Matterport.svg" alt="NuGet downloads">
   </a>
 </p>
 
