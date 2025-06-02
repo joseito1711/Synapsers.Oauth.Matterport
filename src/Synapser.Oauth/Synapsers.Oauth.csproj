@@ -10,6 +10,11 @@
     <PackageProjectUrl>https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>
+      Initial release of Synapsers.Oauth for Matterport OAuth integration.
+      - Supports ASP.NET Core &amp; Blazor
+      - Custom handler, secure token storage, and Identity integration
+    </PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="2.3.0" />
