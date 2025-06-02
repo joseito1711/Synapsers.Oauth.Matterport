@@ -97,8 +97,7 @@ builder.Services.AddAuthentication(options =>
     options.ClientSecret = matterportOptions.ClientSecret;
     options.Scope.Clear();
     foreach (var scope in matterportOptions.Scope ?? Array.Empty<string>())
-        options.Scope.Add(scope);
-    options.CallbackPath = "/signin-matterport-handler"; // Use a unique path for the built-in handler
+        options.Scope.Add(scope); 
 });
 // ...existing code...
 ```

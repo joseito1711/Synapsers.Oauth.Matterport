@@ -32,7 +32,25 @@ if (-not $versionSet) {
         $csproj.Project.AppendChild($newPG) | Out-Null
     }
 }
-$csproj.Save($csprojPath)
+$csproj.OuterXml | Set-Content $csprojPath -Encoding UTF8
+
+# Print the version after saving for confirmation
+Write-Host "Saved version in csproj (post-save):"
+Select-String -Path $csprojPath -Pattern "<Version>" | ForEach-Object { Write-Host $_.Line -ForegroundColor Green }
+
+# Ensure file system flushes the changes before proceeding
+Start-Sleep -Seconds 1
+
+# Print effective version(s) in csproj for diagnostics
+Write-Host "Effective <Version> tags in $csprojPath before packing:" -ForegroundColor Cyan
+$versionTags = Select-String -Path $csprojPath -Pattern "<Version>" | ForEach-Object { $_.Line }
+$versionTags | ForEach-Object { Write-Host $_ -ForegroundColor Yellow }
+if ($versionTags.Count -gt 1) {
+    Write-Host "WARNING: Multiple <Version> tags found in $csprojPath. This can cause versioning issues!" -ForegroundColor Red
+}
+
+# Clean the obj folder to avoid stale build artifacts
+if (Test-Path "obj") { Remove-Item -Recurse -Force "obj" }
 
 # Define output directory
 $nupkgOutput = "nupkg"
@@ -52,9 +70,14 @@ dotnet clean $csprojPath -c Release
 Write-Host "Building project with version $version..."
 dotnet build $csprojPath -c Release
 
-# Pack the project
+# Pack the project with diagnostics
 Write-Host "Packing NuGet package version $version..."
-dotnet pack $csprojPath -c Release --output $nupkgOutput
+$packResult = dotnet pack $csprojPath -c Release --output $nupkgOutput 2>&1
+Write-Host $packResult
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "dotnet pack failed with exit code $LASTEXITCODE" -ForegroundColor Red
+    exit $LASTEXITCODE
+}
 
 # Verify the package was created
 $packagePath = Join-Path $nupkgOutput "Synapsers.Oauth.Matterport.$version.nupkg"
@@ -83,8 +106,19 @@ Get-ChildItem -Path $nupkgOutput | ForEach-Object { Write-Host $_.Name }
 Write-Host "Committing, tagging, and pushing release v$version to git..."
 git add $csprojPath
 if ($LASTEXITCODE -ne 0) { Write-Host "git add failed" -ForegroundColor Red; exit 1 }
-git commit -m "Release v$version"
-git tag v$version
+$commitMsg = "Release v$version"
+$commitResult = git commit -m $commitMsg 2>&1
+Write-Host $commitResult
+if ($commitResult -match "nothing to commit") {
+    Write-Host "No changes to commit." -ForegroundColor Yellow
+}
+# Check if tag exists before creating
+git tag --list | Select-String "^v$version$" > $null
+if ($?) {
+    Write-Host "Tag v$version already exists. Skipping tag creation." -ForegroundColor Yellow
+} else {
+    git tag v$version
+}
 git push
 git push --tags
 Write-Host "Git release and tag v$version created and pushed."
