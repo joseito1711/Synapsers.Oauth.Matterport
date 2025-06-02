@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="srs-full-logo.webp" alt="Synapsers - Matterport OAuth for ASP.NET Core & Blazor" style="max-width: 100%; height: auto;">
+  <img src="content/srs-full-logo.webp" alt="Synapsers - Matterport OAuth for ASP.NET Core & Blazor" style="max-width: 100%; height: auto;">
 </p>
 
 
@@ -54,7 +54,7 @@
 
   **Example:**
 
-  ![Matterport App Registration Screenshot](MP-AppRegistration.png)
+  ![Matterport App Registration Screenshot](/content/MP-AppRegistration.png)
 
 
 ### 2. Install the Library
