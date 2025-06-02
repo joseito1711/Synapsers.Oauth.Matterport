@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "name": "Synapser.Oauth.Matterport .NET Core Launch (TestApp)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/TestApp/bin/Debug/net9.0/TestApp.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/TestApp",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}
