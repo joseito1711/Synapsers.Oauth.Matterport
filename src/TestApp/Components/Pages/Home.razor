@@ -11,7 +11,7 @@
 
 <div class="container py-5">
     <div class="row justify-content-center mb-4">
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <div class="text-center mb-4">
                 <img src="img/srs-logo.webp" alt="Synapsers.Oauth Logo" style="width:56px;height:56px;" class="mb-2" />
                 <h1 class="display-5 fw-bold">Welcome to TestApp Synapsers.Oauth for Matterport</h1>
@@ -69,8 +69,50 @@
                 </div>
                 <div class="card-body bg-light">
                     <ol class="mb-2">
-                        <li>Install the <code>Synapsers.Oauth</code> NuGet package in your ASP.NET Core project.</li>
-                        <li>Configure <code>MatterportAuthentication</code> in <code>Program.cs</code>:
+                        <li>
+                            <b>Prerequisites:</b>
+                            <ul>
+                                <li>.NET 8 SDK or later</li>
+                                <li>SQL Server (for Identity storage)</li>
+                                <li>A registered Matterport developer application</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Register your Matterport App:</b>
+                            <ul>
+                                <li>Go to the <a href="https://developers.matterport.com/" target="_blank">Matterport Developer Portal</a>.</li>
+                                <li>Register a new OAuth application.</li>
+                                <li>Set the <b>Redirect URI</b> to: <code>https://localhost:7197/signin-matterport</code></li>
+                                <li>Note your <b>Client ID</b> and <b>Client Secret</b>.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <b>Configure <code>appsettings.json</code>:</b>
+                            <pre class="bg-white border rounded p-2 small mb-2"><code>{
+  "Matterport": {
+    "ClientId": "YOUR_CLIENT_ID",
+    "ClientSecret": "YOUR_CLIENT_SECRET",
+    "Scope": [ "ViewDetails", "ViewPublic" ]
+  }
+}</code></pre>
+                            <div>Also set your database connection string under <code>ConnectionStrings:DefaultConnection</code>.</div>
+                        </li>
+                        <li>
+                            <b>Database Setup:</b>
+                            <ul>
+                                <li>Update your connection string in <code>appsettings.json</code>.</li>
+                                <li>Apply Entity Framework migrations:</li>
+                            </ul>
+                            <pre class="bg-white border rounded p-2 small mb-2"><code># Run this in PowerShell
+cd src/TestApp
+dotnet ef database update
+</code></pre>
+                        </li>
+                        <li>
+                            <b>Install the <code>Synapsers.Oauth</code> NuGet package</b> in your ASP.NET Core project.
+                        </li>
+                        <li>
+                            <b>Configure <code>MatterportAuthentication</code> in <code>Program.cs</code>:</b>
                             <pre class="bg-white border rounded p-2 small mb-2"><code>builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -84,10 +126,17 @@
 });
 </code></pre>
                         </li>
-                        <li>Set up your Matterport app credentials in <code>appsettings.json</code> or user secrets.</li>
-                        <li>Use the provided login page to authenticate users via Matterport OAuth.</li>
+                        <li>
+                            <b>How the Custom OAuth Flow Works:</b>
+                            <ol>
+                                <li>User visits <code>/Account/StartMatterportLogin</code>, enters email, and starts the OAuth flow.</li>
+                                <li>User authenticates with Matterport and is redirected to <code>/signin-matterport</code>.</li>
+                                <li>The app exchanges the code for tokens, finds or creates the user, stores tokens, and signs in the user.</li>
+                                <li>User is redirected to <code>/</code> (Home), where token info is displayed if authenticated.</li>
+                            </ol>
+                        </li>
                     </ol>
-                    <p class="mb-0"><a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth" target="_blank">See full documentation</a></p>
+                    <p class="mb-0"><a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" target="_blank">See full documentation</a></p>
                 </div>
             </div>
         </div>
