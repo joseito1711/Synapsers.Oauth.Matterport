@@ -1,4 +1,4 @@
-# TestApp Synapsers.Oauth -  Matterport OAuth Integration for ASP.NET Core & Blazor
+# TestApp Synapsers.Oauth.Matterport -  Matterport OAuth Integration for ASP.NET Core & Blazor
 
 This application demonstrates how to integrate Matterport OAuth authentication into an ASP.NET Core/Blazor application using a custom flow. It supports both a custom login flow and the built-in ASP.NET Core OAuth handler, but the custom flow is the primary method.
 

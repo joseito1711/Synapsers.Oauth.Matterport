@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using TestApp.Components;
 using TestApp.Components.Account;
 using TestApp.Data;
-using Synapsers.Oauth;
+using Synapsers.Oauth.Matterport;
 
 var builder = WebApplication.CreateBuilder(args);
 

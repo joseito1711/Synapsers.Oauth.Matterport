@@ -1,6 +1,6 @@
-# Synapsers.Oauth - Matterport OAuth Integration for ASP.NET Core & Blazor
+# Synapsers.Oauth.Matterport - Matterport OAuth Integration for ASP.NET Core & Blazor
 
-Synapsers.Oauth is a reusable .NET library that provides a custom OAuth authentication handler for integrating Matterport OAuth into ASP.NET Core and Blazor applications. It is designed to simplify and secure the process of authenticating users with Matterport, supporting both custom and built-in OAuth flows, and enabling seamless integration with ASP.NET Core Identity.
+Synapsers.Oauth.Matterport is a reusable .NET library that provides a custom OAuth authentication handler for integrating Matterport OAuth into ASP.NET Core and Blazor applications. It is designed to simplify and secure the process of authenticating users with Matterport, supporting both custom and built-in OAuth flows, and enabling seamless integration with ASP.NET Core Identity.
 
 ---
 
@@ -8,7 +8,7 @@ Synapsers.Oauth is a reusable .NET library that provides a custom OAuth authenti
 
 ### Register a Matterport Developer Application
 
-Before integrating Synapsers.Oauth, you must create an OAuth application in the Matterport Developer Portal:
+Before integrating Synapsers.Oauth.Matterport, you must create an OAuth application in the Matterport Developer Portal:
 
 - Go to the [Matterport Developer Portal](https://developers.matterport.com/).
 - Register a new OAuth application.
@@ -42,7 +42,7 @@ Before integrating Synapsers.Oauth, you must create an OAuth application in the 
 
 ## Typical Usage Scenario
 
-- Add the Synapsers.Oauth NuGet package to your ASP.NET Core or Blazor project.
+- Add the Synapsers.Oauth.Matterport NuGet package to your ASP.NET Core or Blazor project.
 - Configure Matterport OAuth settings in `appsettings.json`.
 - Register the custom authentication handler in `Program.cs` using the provided extension methods.
 - Extend your Identity user class to include Matterport token fields.
@@ -80,7 +80,7 @@ public class ApplicationUser : IdentityUser
 ### 3. Register the Handler in `Program.cs`
 
 ```csharp
-using Synapsers.Oauth;
+using Synapsers.Oauth.Matterport;
 
 // ...existing code...
 var matterportSection = builder.Configuration.GetSection("Matterport");

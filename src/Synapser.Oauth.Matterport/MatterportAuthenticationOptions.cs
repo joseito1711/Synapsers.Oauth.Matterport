@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Collections.Generic;
 
-namespace Synapsers.Oauth
+namespace Synapsers.Oauth.Matterport
 {
     public class MatterportAuthenticationOptions : OAuthOptions
     {

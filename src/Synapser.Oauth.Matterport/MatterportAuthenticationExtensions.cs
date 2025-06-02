@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Synapsers.Oauth
+namespace Synapsers.Oauth.Matterport
 {
     public static class MatterportAuthenticationExtensions
     {

@@ -78,6 +78,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+
+        RedirectManager.RedirectTo("/Account/StartMatterportLogin");
         if (HttpMethods.IsGet(HttpContext.Request.Method))
         {
             // Clear the existing external cookie to ensure a clean login process

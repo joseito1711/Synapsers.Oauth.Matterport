@@ -1,6 +1,6 @@
-# Contributing to Synapsers.Oauth - Matterport OAuth for ASP.NET Core & Blazor
+# Contributing to Synapsers.Oauth.Matterport - Matterport OAuth for ASP.NET Core & Blazor
 
-Thank you for your interest in contributing to Synapsers.Oauth - Matterport OAuth for ASP.NET Core & Blazor! We welcome contributions from the community and are grateful for any help you can provide.
+Thank you for your interest in contributing to Synapsers.Oauth.Matterport - Matterport OAuth for ASP.NET Core & Blazor! We welcome contributions from the community and are grateful for any help you can provide.
 
 ## Table of Contents
 
@@ -333,4 +333,4 @@ We appreciate all contributions and will recognize contributors in:
 - Contributors section in README
 - GitHub contributor graphs
 
-Thank you for contributing to Synapsers.Oauth - Matterport OAuth for ASP.NET Core & Blazor! 🎉
+Thank you for contributing to Synapsers.Oauth.Matterport - Matterport OAuth for ASP.NET Core & Blazor! 🎉

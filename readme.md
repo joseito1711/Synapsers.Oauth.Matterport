@@ -3,30 +3,30 @@
 </p>
 
 
-# Synapsers.Oauth - Matterport OAuth Integration for ASP.NET Core & Blazor
+# Synapsers.Oauth.Matterport - Matterport OAuth Integration for ASP.NET Core & Blazor
 
 <p align="center">
-  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.MudBlazor.ThemeManager.Saver/stargazers">
-    <img src="https://img.shields.io/github/stars/SynapeResearchSystemsCorp/Synapsers.MudBlazor.ThemeManager.Saver" alt="GitHub Repo stars">
+  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport/stargazers">
+    <img src="https://img.shields.io/github/stars/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" alt="GitHub Repo stars">
   </a>
-  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.MudBlazor.ThemeManager.Saver/commits/main">
-    <img src="https://img.shields.io/github/last-commit/SynapeResearchSystemsCorp/Synapsers.MudBlazor.ThemeManager.Saver" alt="GitHub last commit">
+  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport/commits/main">
+    <img src="https://img.shields.io/github/last-commit/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" alt="GitHub last commit">
   </a>
-  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.MudBlazor.ThemeManager.Saver/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/SynapeResearchSystemsCorp/Synapsers.MudBlazor.ThemeManager.Saver" alt="Contributors">
+  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" alt="Contributors">
   </a>
-  <a href="https://www.nuget.org/packages/Synapsers.MudBlazor.ThemeManager.Saver/">
-    <img src="https://img.shields.io/nuget/v/Synapsers.MudBlazor.ThemeManager.Saver.svg" alt="NuGet version">
+  <a href="https://www.nuget.org/packages/Synapsers.Oauth/">
+    <img src="https://img.shields.io/nuget/v/Synapsers.Oauth.svg" alt="NuGet version">
   </a>
-  <a href="https://www.nuget.org/packages/Synapsers.MudBlazor.ThemeManager.Saver/">
-    <img src="https://img.shields.io/nuget/dt/Synapsers.MudBlazor.ThemeManager.Saver.svg" alt="NuGet downloads">
+  <a href="https://www.nuget.org/packages/Synapsers.Oauth/">
+    <img src="https://img.shields.io/nuget/dt/Synapsers.Oauth.svg" alt="NuGet downloads">
   </a>
 </p>
 
 
 # Overview
 
-**Synapsers.Oauth** is a reusable .NET library for integrating Matterport OAuth authentication into ASP.NET Core and Blazor applications. It provides a secure, extensible, and production-ready solution for handling Matterport OAuth flows, token storage, and user management, with or without ASP.NET Core Identity.
+**Synapsers.Oauth.Matterport** is a reusable .NET library for integrating Matterport OAuth authentication into ASP.NET Core and Blazor applications. It provides a secure, extensible, and production-ready solution for handling Matterport OAuth flows, token storage, and user management, with or without ASP.NET Core Identity.
 
 ---
 
@@ -90,7 +90,7 @@ public class ApplicationUser : IdentityUser
 ### 5. Register the Handler in `Program.cs`
 
 ```csharp
-using Synapsers.Oauth;
+using Synapsers.Oauth.Matterport;
 // ...existing code...
 var matterportSection = builder.Configuration.GetSection("Matterport");
 builder.Services.Configure<MatterportAppOptions>(matterportSection);

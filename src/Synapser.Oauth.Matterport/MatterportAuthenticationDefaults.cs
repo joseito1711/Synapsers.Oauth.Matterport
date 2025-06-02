@@ -1,4 +1,4 @@
-namespace Synapsers.Oauth
+namespace Synapsers.Oauth.Matterport
 {
     public static class MatterportAuthenticationDefaults
     {

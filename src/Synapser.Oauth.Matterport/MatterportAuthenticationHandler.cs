@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace Synapsers.Oauth
+namespace Synapsers.Oauth.Matterport
 {
     public class MatterportAuthenticationHandler : OAuthHandler<MatterportAuthenticationOptions>
     {
