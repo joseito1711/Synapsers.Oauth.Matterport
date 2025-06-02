@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "src\TestApp\TestApp.csproj", "{8918E1C5-E23C-437C-BC47-E12122DF22DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synapsers.Oauth", "src\Synapser.Oauth\Synapsers.Oauth.csproj", "{05A963F7-9C17-E27A-B7ED-37E70F07B092}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8918E1C5-E23C-437C-BC47-E12122DF22DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8918E1C5-E23C-437C-BC47-E12122DF22DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8918E1C5-E23C-437C-BC47-E12122DF22DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8918E1C5-E23C-437C-BC47-E12122DF22DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A963F7-9C17-E27A-B7ED-37E70F07B092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A963F7-9C17-E27A-B7ED-37E70F07B092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A963F7-9C17-E27A-B7ED-37E70F07B092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A963F7-9C17-E27A-B7ED-37E70F07B092}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D6AB5C5-ABDB-4980-94A4-31D0AFBE8D88}
+	EndGlobalSection
+EndGlobal

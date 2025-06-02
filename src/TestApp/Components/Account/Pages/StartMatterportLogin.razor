@@ -1,0 +1,80 @@
+@page "/Account/StartMatterportLogin"
+@rendermode InteractiveServer
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Options
+@using Synapsers.Oauth
+
+@inject NavigationManager NavigationManager
+@inject IOptions<TestApp.Data.MatterportAppOptions> MatterportAppOptions
+
+<PageTitle>Matterport Login</PageTitle>
+
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px;">
+        <div class="text-center">
+            <div >
+                <div><h3 class="fw-bold mb-2">Sign in with</h3></div>
+                <div><img src="/img/matterport-logo.png" alt="Matterport Logo" style="width: 280px;" class="mb-2" /></div>
+            </div>
+            <p class="text-muted small">Enter your registration email with <b>TestApp</b> to continue</p>
+        </div>
+        <EditForm EditContext="FormEditContext" OnValidSubmit="OnValidSubmitAsync" FormName="MatterportLoginForm">
+            <DataAnnotationsValidator />
+            <ValidationSummary class="mb-2 text-danger" />
+            <div class="mb-3"> 
+                <InputText id="email" class="form-control form-control-lg" @bind-Value="Input.Email" placeholder="you@email.com" />
+                <ValidationMessage For="() => Input.Email" class="text-danger small" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 mt-2">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Continue with Matterport
+            </button>
+        </EditForm>
+    </div>
+</div>
+
+@code { 
+    private InputModel Input { get; set; } = new();
+    private EditContext? FormEditContext { get; set; }
+    private bool _shouldNavigate = false;
+    private string _navigationUrl = "";
+
+    protected override void OnInitialized()
+    {
+        FormEditContext = new EditContext(Input);
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+        var options = MatterportAppOptions.Value;
+        var clientId = options.ClientId;
+        Console.WriteLine($"Matterport ClientId: '{clientId}'");
+        if (string.IsNullOrWhiteSpace(clientId))
+        {
+            throw new InvalidOperationException("Matterport ClientId is not configured. Check your Program.cs and configuration.");
+        }
+        var redirectUri = NavigationManager.BaseUri.TrimEnd('/') + "/signin-matterport";
+        var scopes = string.Join(" ", options.Scope);
+        var state = Uri.EscapeDataString(Input.Email);
+        _navigationUrl = $"https://authn.matterport.com/oauth/authorize?client_id={clientId}&response_type=code&scope={Uri.EscapeDataString(scopes)}&redirect_uri={Uri.EscapeDataString(redirectUri)}&state={state}";
+        _shouldNavigate = true;
+        await Task.CompletedTask;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_shouldNavigate)
+        {
+            _shouldNavigate = false;
+            NavigationManager.NavigateTo(_navigationUrl, forceLoad: true);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private class InputModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+    }
+}

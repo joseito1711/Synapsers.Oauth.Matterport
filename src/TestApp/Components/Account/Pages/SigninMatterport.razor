@@ -1,0 +1,114 @@
+@page "/signin-matterport"
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.WebUtilities
+@using System.Net.Http
+@using System.Text.Json
+@using TestApp.Data
+@using Microsoft.Extensions.Options
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject NavigationManager NavigationManager
+@inject ILogger<SigninMatterport> Logger
+@inject IOptions<TestApp.Data.MatterportAppOptions> MatterportAppOptions
+
+<PageTitle>Matterport Callback</PageTitle>
+
+@if (!string.IsNullOrEmpty(error))
+{
+    <div class="alert alert-danger">@error</div>
+}
+else if (isLoading)
+{
+    <div>Signing you in with Matterport...</div>
+}
+
+@code {
+    private string? error;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var query = QueryHelpers.ParseQuery(new Uri(NavigationManager.Uri).Query);
+        var code = query["code"].FirstOrDefault();
+        var state = query["state"].FirstOrDefault();
+
+        if (string.IsNullOrEmpty(code))
+        {
+            error = "No code returned from Matterport.";
+            isLoading = false;
+            return;
+        }
+        var email = string.IsNullOrEmpty(state) ? null : Uri.UnescapeDataString(state);
+        if (string.IsNullOrEmpty(email))
+        {
+            error = "State parameter missing or invalid (email not found). Please try again.";
+            isLoading = false;
+            return;
+        }
+
+        var options = MatterportAppOptions.Value;
+        var clientId = options.ClientId;
+        var clientSecret = options.ClientSecret;
+        var scopes = string.Join(" ", options.Scope);
+        var redirectUri = NavigationManager.BaseUri.TrimEnd('/') + "/signin-matterport";
+        var tokenEndpoint = "https://api.matterport.com/api/oauth/token";
+
+        var http = new HttpClient();
+        var content = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string>("grant_type", "authorization_code"),
+            new KeyValuePair<string, string>("code", code),
+            new KeyValuePair<string, string>("client_id", clientId ?? ""),
+            new KeyValuePair<string, string>("client_secret", clientSecret ?? ""),
+            new KeyValuePair<string, string>("redirect_uri", redirectUri),
+            new KeyValuePair<string, string>("scope", scopes)
+        });
+        var response = await http.PostAsync(tokenEndpoint, content);
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            error = $"Failed to exchange code for tokens: {response.StatusCode}. Details: {errorContent}";
+            isLoading = false;
+            return;
+        }
+        var json = await response.Content.ReadAsStringAsync();
+        var tokenResult = JsonSerializer.Deserialize<MatterportTokenResult>(json);
+        if (tokenResult is null || string.IsNullOrEmpty(tokenResult.access_token))
+        {
+            error = "Invalid token response from Matterport.";
+            isLoading = false;
+            return;
+        }
+        // Find or create user
+        var user = await UserManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            user = new ApplicationUser { UserName = email, Email = email };
+            var result = await UserManager.CreateAsync(user);
+            if (!result.Succeeded)
+            {
+                error = $"Failed to create user: {string.Join(",", result.Errors.Select(e => e.Description))}";
+                isLoading = false;
+                return;
+            }
+        }
+        // Store tokens (customize as needed)
+        user.MatterportAccessToken = tokenResult.access_token;
+        user.MatterportRefreshToken = tokenResult.refresh_token;
+        user.MatterportTokenExpires = DateTime.UtcNow.AddSeconds(tokenResult.expires_in);
+        await UserManager.UpdateAsync(user);
+        // Sign in
+        await SignInManager.SignInAsync(user, isPersistent: false);
+        // Redirect to home or return url
+        NavigationManager.NavigateTo("/");
+    }
+
+    private class MatterportTokenResult
+    {
+        public string access_token { get; set; } = string.Empty;
+        public string refresh_token { get; set; } = string.Empty;
+        public int expires_in { get; set; }
+        public string token_type { get; set; } = string.Empty;
+    }
+}

@@ -1,0 +1,124 @@
+﻿@page "/"
+@rendermode InteractiveServer 
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
+@using TestApp.Data
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<ApplicationUser> UserManager
+@inject NavigationManager NavigationManager
+
+
+<div class="container py-5">
+    <div class="row justify-content-center mb-4">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <img src="img/srs-logo.webp" alt="Synapsers.Oauth Logo" style="width:56px;height:56px;" class="mb-2" />
+                <h1 class="display-5 fw-bold">Welcome to TestApp Synapsers.Oauth for Matterport</h1>
+                <p class="lead text-muted">This sample demonstrates integration with <span class="fw-semibold">Synapsers.Oauth</span> for Matterport authentication in ASP.NET Core.</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <AuthorizeView>
+                        <Authorized>
+                            <div class="card border-success shadow-sm mb-4">
+                                <div class="card-header bg-success text-white">
+                                    <h4 class="mb-0">Matterport Token Information</h4>
+                                </div>
+                                <div class="card-body">
+                                    @if (isLoading)
+                                    {
+                                        <p class="text-info"><em>Loading token information...</em></p>
+                                    }
+                                    else if (!string.IsNullOrEmpty(matterportAccessToken))
+                                    {
+                                        <dl class="row mb-0">
+                                            <dt class="col-sm-4">Access Token:</dt>
+                                            <dd class="col-sm-8" style="word-break: break-all;">
+                                                <span class="badge bg-secondary text-wrap">@matterportAccessToken</span>
+                                            </dd>
+                                            <dt class="col-sm-4">Expires At:</dt>
+                                            <dd class="col-sm-8">@(matterportTokenExpires?.ToLocalTime().ToString("F") ?? "N/A")</dd>
+                                        </dl>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-warning"><em>Matterport token information not available for your account.</em></p>
+                                    }
+                                </div>
+                            </div>
+                        </Authorized>
+                        <NotAuthorized>
+                            <div class="card border-info shadow-sm mb-4">
+                                <div class="card-body text-center">
+                                    <p class="mb-3">Please log in to see your Matterport token information.</p>
+                                    <button class="btn btn-primary btn-lg px-4" @onclick="GoToMatterportLogin">
+                                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign in with Matterport
+                                    </button>
+                                </div>
+                            </div>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">How to Integrate Synapsers.Oauth</h5>
+                </div>
+                <div class="card-body bg-light">
+                    <ol class="mb-2">
+                        <li>Install the <code>Synapsers.Oauth</code> NuGet package in your ASP.NET Core project.</li>
+                        <li>Configure <code>MatterportAuthentication</code> in <code>Program.cs</code>:
+                            <pre class="bg-white border rounded p-2 small mb-2"><code>builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddMatterport(options =>
+{
+    options.ClientId = "YOUR_CLIENT_ID";
+    options.ClientSecret = "YOUR_CLIENT_SECRET";
+    options.Scope.Add("mpoffline_access");
+});
+</code></pre>
+                        </li>
+                        <li>Set up your Matterport app credentials in <code>appsettings.json</code> or user secrets.</li>
+                        <li>Use the provided login page to authenticate users via Matterport OAuth.</li>
+                    </ol>
+                    <p class="mb-0"><a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth" target="_blank">See full documentation</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    private string? matterportAccessToken;
+    private DateTime? matterportTokenExpires;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            var appUser = await UserManager.GetUserAsync(user);
+            if (appUser != null)
+            {
+                matterportAccessToken = appUser.MatterportAccessToken;
+                matterportTokenExpires = appUser.MatterportTokenExpires;
+            }
+        }
+        isLoading = false;
+    }
+
+    private void GoToMatterportLogin()
+    {
+        NavigationManager.NavigateTo("/Account/StartMatterportLogin");
+    }
+}
