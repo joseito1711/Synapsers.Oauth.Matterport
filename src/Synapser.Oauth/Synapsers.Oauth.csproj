@@ -7,6 +7,9 @@
     <PackageId>Synapsers.Oauth</PackageId>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="2.3.0" />
