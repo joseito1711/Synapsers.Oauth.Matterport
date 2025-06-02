@@ -3,8 +3,8 @@
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>Synapsers.Oauth</AssemblyName>
-    <PackageId>Synapsers.Oauth</PackageId>
+    <AssemblyName>Synapsers.Oauth.Matterport</AssemblyName>
+    <PackageId>Synapsers.Oauth.Matterport</PackageId>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport</PackageProjectUrl>
